@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<title></title>
+
+<style type="text/css">
+
+
+/* From cssbuttons.io */
+button {
+ font-size: 17px;
+ font-family: inherit;
+ font-weight: 700;
+ padding: 4px;
+ border-radius: 20px;
+ border: none;
+ color: black;
+ box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+ background: linear-gradient(0deg, rgba(255,213,0,1) 0%, rgba(255,213,0,1) 47%, rgba(0,91,187,1) 47%, rgba(0,91,187,1) 100%);
+}
+
+button .button-content {
+ display: flex;
+ align-items: center;
+ background: white;
+ padding: 0.7em 1.5em;
+ padding-left: 1.2em;
+ border-radius: 16px;
+}
+
+button svg {
+ width: 22px;
+ height: 22px;
+ margin-right: 6px;
+ color: #ff0000;
+ transition: transform 0.3s;
+}
+
+button:hover svg {
+ transform: scale(1.2);
+}
+
+
+
+
+body{
+  background: rgba(0,0,0,0.9);
+}
+form{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -250px;
+  width: 500px;
+  height: 200px;
+  border: 4px dashed #fff;
+}
+form p{
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  line-height: 170px;
+  color: #ffffff;
+  font-family: Arial;
+}
+form input{
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  opacity: 0;
+}
+form button{
+  margin: 0;
+  color: #fff;
+  background: #16a085;
+  border: none;
+  width: 508px;
+  height: 35px;
+  margin-top: -20px;
+  margin-left: -4px;
+  border-radius: 4px;
+  border-bottom: 4px solid #117A60;
+  transition: all .2s ease;
+  outline: none;
+}
+form button:hover{
+  background: #149174;
+	color: #0C5645;
+}
+form button:active{
+  border:0;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
+</style>
+</head>
+<body>
+
+
+<h1 style="color:white;text-align:center">Welcome to Nepali Drive</h1>
+
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a class="btn" href="#">My file</a>
+  <a class="btn2" href="#">Shared File</a>
+  <a class="" href="#">Change password</a>
+  
+ 
+</div>
+
+<span style="color:white;font-size:50px;cursor:pointer" onclick="openNav()">&#9776;</span>
+
+<form class="f1">
+
+<input type="file" name="any[]" multiple required><br>
+<p>Drag your files here or click in this area.</p>
+
+<br>
+<button type="submit" class="sub">Upload</button>
+
+
+</form>
+
+
+
+</body>
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+$('form input').change(function () {
+    $('form p').text(this.files.length + " file(s) selected");
+  });
+
+$(".f1").submit(function(p){
+$("form p").html("Uploading data.Please wait........");
+p.preventDefault();
+var fael= new FormData(this);
+
+$.ajax({
+
+
+url:"send.php",
+type:"post",
+data:fael,
+processData:false,
+contentType:false,
+success:function(data){
+$("form p").html(data);
+}
+
+
+});
+
+
+
+});
+$(".btn").click(function(){
+
+window.location.href="fael.html";
+});
+
+$(".btn2").click(function(){
+
+window.location.href="fshare.html";
+});
+
+
+});
+
+</script>
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+
+</script>
+
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid black;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+  
+  }
+
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<title></title>
+</head>
+<body>
+
+
+<h2 style="float:centre" class="nam">
+
+</h2>
+<br>
+<br>
+
+<h1 style="float:centre">Your files</h1>
+<table id="customers" class="co">
+
+
+</table>
+<br>
+<br>
+
+<table id="customers" class="">
+
+
+</table>
+
+<div class="lo">
+
+
+</div>
+</body>
+
+<script type="text/javascript">
+
+
+$(document).ready(function(){
+
+
+$.ajax({
+url:"nam.php",
+type:"post",
+success:function(data){
+$(".nam").html(data);
+}
+
+});
+
+$.ajax({
+url:"fael.php",
+type:"post",
+success:function(data){
+
+$(".co").html(data);
+}
+
+
+});
+
+
+setInterval(function(){ 
+    //this code runs every second 
+    
+    
+    $.ajax({
+    url:"ssaa.php",
+    type:"post",
+    success:function(data){
+    
+    $(".coo").html(data);
+    }
+    
+    
+    });
+    
+}, 3000);
+
+
+
+
+
+
+
+
+
+$(document).on("click",".del",function(){
+var cnf=confirm("Click ok to delete");
+var val=$(this).data("del");
+if(cnf==true){
+$(".lo").html("loading");
+var val=$(this).data("del");
+$.ajax({
+url:"del.php",
+type:"post",
+data:{d:val},
+success:function(data){
+$(".lo").html(data);
+setTimeout(function(){ $(".lo").empty(); }, 2000);
+
+$.ajax({
+url:"fael.php",
+type:"post",
+success:function(dataa){
+
+$(".co").html(dataa);
+}
+
+
+});
+
+}
+
+});
+}else{
+alert("Delete cancelled");
+}
+
+});
+
+$(document).on("click",".dow",function(){
+var val=$(this).data("dow");
+var kk=window.location.hostname;
+var kkk=window.location.protocol;
+var kkkk=window.location.port;
+var red=kkk+"//"+kk+"/store/"+val;
+window.location.href=red;
+
+});
+
+$(document).on("click",".send",function(){
+$(".lo").html("REDIRECTING TO NEW PAGE.....")
+setTimeout(function(){ $(".lo").empty(); }, 2000);
+
+var senn=$(this).data("send");
+
+$.ajax({
+
+url:"share.php",
+type:"post",
+data:{senn:senn},
+success:function(data){
+
+if(data=="yes"){
+window.location.href="shared.html";
+}else{
+alert("failed to share");
+
+}
+
+}
+
+});
+
+
+});
+
+
+
+$(document).on("click",".dell",function(){
+var cnf=confirm("Click ok to delete");
+var val=$(this).data("del");
+if(cnf==true){
+$(".lo").html("loading");
+var val=$(this).data("del");
+$.ajax({
+url:"dell.php",
+type:"post",
+data:{d:val},
+success:function(data){
+$(".lo").html(data);
+setTimeout(function(){ $(".lo").empty(); }, 2000);
+
+$.ajax({
+url:"ssaa.php",
+type:"post",
+success:function(data){
+
+$(".coo").html(data);
+}
+
+
+});
+
+
+}
+
+});
+}else{
+alert("Delete cancelled");
+}
+
+});
+
+$(document).on("click",".doww",function(){
+var val=$(this).data("doww");
+var kk=window.location.hostname;
+var kkk=window.location.protocol;
+var kkkk=window.location.port;
+var red=kkk+"//"+kk+"/share/"+val;
+
+window.location.href=red;
+
+});
+
+});
+</script>
+</html>
